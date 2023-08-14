@@ -1,9 +1,18 @@
 <script setup lang="ts">
-import { nextTick, ref, shallowRef } from 'vue';
+import { nextTick, ref, shallowRef, reactive, computed } from 'vue';
 defineProps<{
   msg: string
 }>()
 const x = /*html*/'<span>v-html span</span>';
+const strObj = reactive({
+  list: [
+    '23ifk',
+    'skej2',
+  ],
+});
+const computListLen = computed(() => {
+  return strObj.list.length > 1 ? 'more' : 'less';
+});
 const dId = 'iweu8';
 const count = ref(0);
 const obj1 = ref({
@@ -40,6 +49,7 @@ function changeShallowRefCount() {
       <div v-html="x"></div>
     </h3>
     <div><span>不能自动解包，要用value {{ obj3.key.value + 1 }}</span></div>
+    <div>computed value: {{ computListLen }}</div>
   </div>
 </template>
 

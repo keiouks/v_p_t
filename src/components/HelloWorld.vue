@@ -13,6 +13,9 @@ const strObj = reactive({
 const computListLen = computed(() => {
   return strObj.list.length > 1 ? 'more' : 'less';
 });
+const h1Classes = reactive({
+  green: true,
+});
 const dId = 'iweu8';
 const count = ref(0);
 const obj1 = ref({
@@ -22,6 +25,7 @@ const obj1 = ref({
 const obj2 = shallowRef({count: 1});
 const obj3 = {key: ref(10)};
 async function onClick() {
+  h1Classes.green = !h1Classes.green;
   count.value++;
   // 异步触发导致后续逻辑将会在dom渲染完后继续执行
   // 因为前面修改了count的值触发dom渲染，
@@ -41,7 +45,7 @@ function changeShallowRefCount() {
 
 <template>
   <div class="greetings">
-    <h1 class="green" :id="dId">{{ msg }}</h1>
+    <h1 class="static" :class="h1Classes" :id="dId">{{ msg }}</h1>
     <a @click="onClick">onClick ref count = {{count}}</a>
     <div><span @click="changeNestedCount">嵌套obj count = {{ obj1.nested.count }}</span></div>
     <div><a @click="changeShallowRefCount">onClick shallowRef count = {{obj2.count}}</a></div>

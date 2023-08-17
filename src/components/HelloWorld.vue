@@ -24,6 +24,7 @@ const obj1 = ref({
 });
 const obj2 = shallowRef({count: 1});
 const obj3 = {key: ref(10)};
+const shouldExist = ref(true);
 async function onClick() {
   h1Classes.green = !h1Classes.green;
   count.value++;
@@ -36,6 +37,7 @@ async function onClick() {
 }
 function changeNestedCount() {
   obj1.value.nested.count++;
+  shouldExist.value = !shouldExist.value;
 }
 function changeShallowRefCount() {
   obj2.value.count++;
@@ -49,7 +51,7 @@ function changeShallowRefCount() {
     <a @click="onClick">onClick ref count = {{count}}</a>
     <div><span @click="changeNestedCount">嵌套obj count = {{ obj1.nested.count }}</span></div>
     <div><a @click="changeShallowRefCount">onClick shallowRef count = {{obj2.count}}</a></div>
-    <h3>
+    <h3 v-if="shouldExist">
       <div v-html="x"></div>
     </h3>
     <div><span>不能自动解包，要用value {{ obj3.key.value + 1 }}</span></div>

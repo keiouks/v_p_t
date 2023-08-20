@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { nextTick, ref, shallowRef, reactive, computed } from 'vue';
+import { nextTick, ref, shallowRef, reactive, computed, onMounted } from 'vue';
+import Other from './Other.vue';
 defineProps<{
   msg: string
 }>()
@@ -43,15 +44,44 @@ function changeShallowRefCount() {
   obj2.value.count++;
   console.log(obj2.value);
 }
+
+const input = ref<HTMLInputElement>();
+const list = ref([2,4,34,56,12,78]);
+const listRef = ref<HTMLLIElement[]>([]);
+
+const funRef = (el: any) => {console.log('heading is:', el);};
+const otherComRef = ref<InstanceType<typeof Other>>();
+
+onMounted(() => {
+  console.log('component is mounted.');
+  input.value?.focus();
+  console.log(listRef.value);
+  console.log('other ref:', otherComRef.value?.b);
+});
+
+const ageRef = ref(23);
+function onBiggerAge() {
+  ageRef.value++;
+}
+const otherStrRef = ref('eee');
 </script>
 
 <template>
   <div class="greetings">
+    <input ref="input" />
+    <Other ref="otherComRef" name="super dayci" :age="ageRef" @bigger-age="onBiggerAge" v-model="otherStrRef">
+      <div>
+        <span>add some contain from slot {{ otherStrRef }}</span>
+      </div>
+    </Other>
+    <ul>
+      <li v-for="item in list" ref="listRef">{{ item }}</li>
+    </ul>
     <h1 class="static" :class="h1Classes" :id="dId">{{ msg }}</h1>
     <a @click="onClick">onClick ref count = {{count}}</a>
     <div><span @click="changeNestedCount">嵌套obj count = {{ obj1.nested.count }}</span></div>
     <div><a @click="changeShallowRefCount">onClick shallowRef count = {{obj2.count}}</a></div>
-    <h3 v-if="shouldExist">
+    <h3 v-if="shouldExist" :ref="funRef">
       <div v-html="x"></div>
     </h3>
     <div><span>不能自动解包，要用value {{ obj3.key.value + 1 }}</span></div>

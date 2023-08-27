@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { ref, shallowRef } from 'vue';
-import ComA from './ComA.vue';
+import { ref, shallowRef, defineAsyncComponent } from 'vue';
 import ComB from './ComB.vue';
 
 interface Props {
@@ -12,12 +11,16 @@ interface Props {
   }
 }
 
+const AsyncComA = defineAsyncComponent(() => {
+  return import('./ComA.vue');
+});
+
 const props = defineProps<Props>();
 const emit = defineEmits(['bigger-age', 'update:modelValue']);
-const currentCom = shallowRef(ComA);
+const currentCom = shallowRef(AsyncComA);
 
 function onClick() {
-  currentCom.value = (currentCom.value === ComA) ? ComB : ComA;
+  currentCom.value = (currentCom.value === AsyncComA) ? ComB : AsyncComA;
   emit('bigger-age');
 }
 

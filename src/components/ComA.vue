@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { onBeforeMount, onBeforeUnmount, onBeforeUpdate, onMounted, onUnmounted, onUpdated } from 'vue';
 
+defineProps<{
+  msg?: string;
+  msg2: string;
+}>()
+
 onBeforeMount(() => {
   console.log('ComA before mount');
 });
@@ -22,5 +27,6 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div>component AAA!</div>
+  <div>component AAA! {{ msg || '' }}</div>
+  <div>{{ msg2 }}</div>
 </template>

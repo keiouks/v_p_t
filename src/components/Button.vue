@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { buttonStyle } from './button.css';
+import { buttonDialogStyle } from './button.css';
 import { changeTheme } from '../lib/theme';
 
 function handleClick() {
@@ -7,7 +7,7 @@ function handleClick() {
 }
 </script>
 <template>
-  <button :class="buttonStyle" :onclick="handleClick">
+  <button :class="buttonDialogStyle" :onclick="handleClick">
     button
   </button>
 </template>

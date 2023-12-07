@@ -6,3 +6,16 @@ export const buttonStyle = style({
   color: themeVar.text.h1,
   cursor: 'pointer',
 });
+
+export const normalButtonStyle = style([buttonStyle, {
+  display: 'inline-block',
+  width: '100px',
+  height: '50px',
+}]);
+
+export const dialogButtonStyle = style([buttonStyle, {
+  display: 'block',
+  width: '100%',
+  height: '50px',
+  background: themeVar.bg.card,
+}]);

@@ -1,8 +1,18 @@
 <script setup lang="ts">
-import { buttonStyle } from './button2.css';
+import { type Button2Props, TypeEnum } from './button2';
+import { normalButtonStyle, dialogButtonStyle } from './button2.css';
+
+const props = withDefaults(defineProps<Button2Props>(), {
+  type: 'normal'
+});
+
+const style = {
+  [TypeEnum.Normal]: normalButtonStyle,
+  [TypeEnum.Dialog]: dialogButtonStyle,
+}[props.type];
 </script>
 <template>
-  <button :class="buttonStyle">
-    button2
+  <button :class="style">
+    {{ props.text }}
   </button>
 </template>

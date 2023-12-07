@@ -1,7 +1,8 @@
 <script setup lang="ts">
 // import { ref, reactive } from 'vue';
 import Button from './components/Button.vue';
-import Button2 from './components/Button2.vue';
+// import Button2 from './components/Button2.vue';
+import Dialog from './components/dialog.vue';
 // import { Radio, RadioGroup, Checkbox, CheckboxGroup } from '@futuweb/moo-ui';
 
 // const checked = ref(1);
@@ -22,7 +23,8 @@ import Button2 from './components/Button2.vue';
       <Checkbox :value="3" >skdjfk</Checkbox>
     </CheckboxGroup> -->
     <Button />
-    <Button2 />
+    <!-- <Button2 text="button2" /> -->
+    <Dialog />
   </header>
 </template>
 
